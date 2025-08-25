@@ -6,9 +6,8 @@ function App() {
   const [expenses, setExpenses] = useState([]);
   const [form, setForm] = useState({ title: '', amount: '', category: '' });
 
-  const API_URL = process.env.API_URL;
   useEffect(() => {
-    fetch(`${API_URL}/api/expenses`)
+    fetch('http://localhost:5000/api/expenses')
       .then(res => res.json())
       .then(data => {
         console.log("Fetched data from backend:", data);
@@ -25,7 +24,7 @@ function App() {
     e.preventDefault();
     if (!form.title || !form.amount || !form.category) return;
 
-    const res = await fetch(`${API_URL}/api/expenses`, {
+    const res = await fetch('http://localhost:5000/api/expenses', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(form),
