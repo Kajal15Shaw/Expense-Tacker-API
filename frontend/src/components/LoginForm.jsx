@@ -6,6 +6,8 @@ function LoginForm() {
   const [formData, setFormData] = useState({ username: '', password: '' });
   const navigate = useNavigate();
 
+  const API_URL = process.env.API_URL;
+
   const handleChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -13,7 +15,7 @@ function LoginForm() {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', formData);
+      const res = await axios.post(`${API_URL}/api/auth/login`, formData);
       localStorage.setItem('token', res.data.token);
       navigate('/');
     } catch (err) {

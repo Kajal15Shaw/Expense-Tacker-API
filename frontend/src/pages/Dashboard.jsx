@@ -6,9 +6,11 @@ import ExpenseList from '../components/ExpenseList';
 const Dashboard = () => {
   const [expenses, setExpenses] = useState([]);
 
+  const API_URL = process.env.API_URL;
+  
   const fetchExpenses = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/expenses', {
+      const res = await axios.get(`${API_URL}/api/expenses`, {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('token'),
         },
@@ -21,7 +23,7 @@ const Dashboard = () => {
 
   const addExpense = async (expense) => {
     try {
-      const res = await axios.post('http://localhost:5000/api/expenses', expense, {
+      const res = await axios.post(`${API_URL}/api/expenses`, expense, {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('token'),
         },

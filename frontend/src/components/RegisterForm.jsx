@@ -6,14 +6,16 @@ function RegisterForm() {
   const [formData, setFormData] = useState({ username: '', password: '' });
   const navigate = useNavigate();
 
+   const API_URL = process.env.API_URL;
+   
   const handleChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
+  
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/auth/register', formData);
+      await axios.post(`${API_URL}/api/auth/register`, formData);
       alert('Registration successful! You can log in now.');
       navigate('/login');
     } catch (err) {
